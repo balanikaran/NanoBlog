@@ -134,4 +134,4 @@ dmypy.json
 .pytype/
 
 # Database files
-.db
+app.db
