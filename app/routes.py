@@ -65,6 +65,7 @@ def beforeRequest():
         db.session.commit()
 
 @app.route("/edit_profile", methods = ["GET", "POST"])
+@login_required
 def editProfile():
     form = EditProfileForm()
     if form.validate_on_submit():
