@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 import logging, os
 from logging.handlers import SMTPHandler, RotatingFileHandler
+from flask_mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -12,6 +13,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = "login"
+mail = Mail(app)
 
 if not app.debug:
     if app.config["MAIL_SERVER"]:
@@ -27,7 +29,7 @@ if not app.debug:
             toaddrs=app.config['ADMINS'], subject='NanoBlog Failure',
             credentials=auth, secure=secure)
         mailHandler.setLevel(logging.ERROR)
-        app.logger.addHandler(mail_handler)
+        app.logger.addHandler(mailHandler)
     
     if not os.path.exists('logs'):
         os.mkdir('logs')

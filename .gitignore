@@ -135,3 +135,6 @@ dmypy.json
 
 # Database files
 app.db
+
+# log files
+logs/
